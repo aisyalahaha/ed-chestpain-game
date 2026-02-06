@@ -1,0 +1,248 @@
+/* Simple, GitHub Pages-friendly styles */
+:root {
+  --bg: #0b1220;
+  --card: rgba(15, 23, 42, 0.94);
+  --text: #e5e7eb;
+  --muted: #a3a3a3;
+  --primary: #38bdf8;
+  --secondary: #334155;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(circle at 30% 20%, #111827, #050816);
+  color: var(--text);
+}
+
+.wrap { max-width: 1024px; margin: 0 auto; padding: 18px; }
+header h1 { margin: 0 0 6px; font-size: 22px; }
+.hint { margin: 0 0 14px; color: var(--muted); }
+
+.gameShell {
+  position: relative;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+
+canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.45);
+  padding: 16px;
+}
+
+.hidden { display: none !important; }
+
+.card {
+  width: min(620px, 95%);
+  background: var(--card);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+}
+
+.dialogue { font-size: 16px; line-height: 1.4; margin-bottom: 12px; }
+.qTitle { font-weight: 700; margin: 8px 0 10px; }
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.choice {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 12px;
+  background: rgba(51, 65, 85, 0.55);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.choice:hover { filter: brightness(1.1); }
+.choice:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.feedback { min-height: 22px; margin: 6px 0 2px; color: var(--text); }
+.actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
+
+button.primary, button.secondary {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.primary { background: var(--primary); color: #04121a; }
+button.secondary { background: var(--secondary); color: var(--text); }
+
+footer { margin-top: 10px; color: var(--muted); }
+
+
+
+
+/* Mobile / touch controls (Virtual Joystick) */
+.touchControls{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.joystick{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  width:170px;
+  height:170px;
+  pointer-events:auto;
+  touch-action:none;
+}
+
+.joyBase{
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.25);
+  background: rgba(15, 23, 42, 0.40);
+  backdrop-filter: blur(2px);
+}
+
+.joyThumb{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:74px;
+  height:74px;
+  margin-left:-37px;
+  margin-top:-37px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.25);
+  background: rgba(226, 232, 240, 0.55);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.touchInteract{
+  pointer-events:auto;
+  position:absolute;
+  right:16px;
+  bottom:28px;
+  width:78px;
+  height:78px;
+  border-radius:22px;
+  border:1px solid rgba(148,163,184,0.25);
+  background: rgba(56, 189, 248, 0.80);
+  color:#04121a;
+  font-weight:900;
+  font-size:22px;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+}
+
+.touchInteract:active{ filter: brightness(1.1); }
+
+/* Rotate hint (only in portrait) */
+.rotateHint{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border-radius: 999px;
+  border:1px solid rgba(148,163,184,0.25);
+  background: rgba(15, 23, 42, 0.65);
+  color: var(--text);
+  font-size: 13px;
+  pointer-events:none;
+  display:none;
+}
+
+/* Only show touch UI on touch devices */
+@media (hover:hover) and (pointer:fine){
+  .touchControls{ display:none; }
+}
+
+/* Encourage landscape */
+@media (orientation:portrait){
+  .rotateHint{ display:block; }
+}
+
+
+/* Start overlay */
+.startOverlay{
+  background: rgba(0,0,0,0.65);
+}
+
+.startTitle{ margin:0 0 6px; font-size:18px; }
+.startHint{ margin:0 0 12px; color: var(--muted); }
+.startNote{ display:block; margin-top:10px; color: var(--muted); }
+
+.formGrid{
+  display:grid;
+  gap:10px;
+  margin: 10px 0 12px;
+}
+.formGrid label{ display:grid; gap:6px; font-size:13px; color: var(--muted); }
+.formGrid input{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(2, 6, 23, 0.35);
+  color: var(--text);
+  outline: none;
+}
+.formGrid input:focus{ border-color: rgba(56, 189, 248, 0.65); }
+
+/* Certificate */
+.certificate{
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(2, 6, 23, 0.35);
+}
+.certTitle{
+  font-weight: 900;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.certBody{
+  display:grid;
+  gap:6px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.certActions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.submitStatus{
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Printable certificate */
+@media print{
+  body{ background:#fff; color:#000; }
+  header, footer, canvas, .touchControls, .rotateHint, .hint { display:none !important; }
+  .overlay{ position: static; background: transparent; display:block; }
+  .card{ box-shadow:none; border:1px solid #ddd; background:#fff; color:#000; }
+  .choice, .actions, #dialogueActions { display:none !important; }
+  .certificate{ border:1px solid #ddd; background:#fff; }
+}

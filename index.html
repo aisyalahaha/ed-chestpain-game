@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ED Chest Pain Mini-Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ED Chest Pain Mini‑Game</h1>
+      <p class="hint">Move with <b>Arrow Keys / WASD</b> (desktop) or the on‑screen pad (mobile). Approach the patient and press <b>E</b>.</p>
+    </header>
+
+    <div class="gameShell">
+
+    <div id="startOverlay" class="overlay startOverlay" role="dialog" aria-modal="true">
+      <div class="card">
+        <h2 class="startTitle">Student Login</h2>
+        <p class="startHint">Enter your details to start the game.</p>
+        <div class="formGrid">
+          <label>
+            <span>Name</span>
+            <input id="studentName" type="text" autocomplete="name" placeholder="e.g., Nur Aisyah" />
+          </label>
+          <label>
+            <span>Student ID</span>
+            <input id="studentId" type="text" autocomplete="off" placeholder="e.g., U29-12345" />
+          </label>
+        </div>
+        <div class="actions">
+          <button id="startBtn" class="primary">Start</button>
+        </div>
+        <small class="startNote">Your name & ID will be shown on the certificate and included in the score export.</small>
+      </div>
+    </div>
+
+      <canvas id="game" width="960" height="540" aria-label="Game canvas"></canvas>
+
+      <div id="touchControls" class="touchControls" aria-label="Touch controls">
+  <div id="rotateHint" class="rotateHint" role="status" aria-live="polite">
+    Rotate your phone to <b>landscape</b> for best play.
+  </div>
+  <div id="joystick" class="joystick" aria-label="Virtual joystick">
+    <div class="joyBase"></div>
+    <div id="joyThumb" class="joyThumb"></div>
+  </div>
+  <button id="touchInteract" class="touchInteract" aria-label="Interact">E</button>
+</div>
+
+      <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
+        <div class="card">
+          <div id="dialogue" class="dialogue"></div>
+
+          <div id="questionBlock" class="hidden">
+            <div class="qTitle"><span id="qText">As a nurse, what is the first thing you will do?</span></div>
+            <div class="choices">
+              <button class="choice" data-choice="oxygen">Give oxygen</button>
+              <button class="choice" data-choice="ecg">Do ECG</button>
+              <button class="choice" data-choice="rest">Encourage patient to rest</button>
+              <button class="choice" data-choice="ivd">Give IVD</button>
+            </div>
+            <div id="feedback" class="feedback"></div>
+            <div id="certificateBlock" class="certificate hidden">
+              <div class="certTitle">Certificate of Completion</div>
+              <div class="certBody">
+                <div><b>Name:</b> <span id="certName"></span></div>
+                <div><b>Student ID:</b> <span id="certId"></span></div>
+                <div><b>Game:</b> ED Chest Pain Mini‑Game</div>
+                <div><b>Score:</b> <span id="certScore"></span></div>
+                <div><b>Date:</b> <span id="certDate"></span></div>
+              </div>
+              <div class="certActions">
+                <button id="downloadCsvBtn" class="secondary">Download Score (CSV)</button>
+                <button id="printCertBtn" class="secondary">Print / Save PDF</button>
+              </div>
+              <div id="submitStatus" class="submitStatus"></div>
+            </div>
+            <div class="actions">
+              <button id="restartBtn" class="secondary">Restart</button>
+              <button id="nextQBtn" class="primary hidden">Next Question</button>
+              <button id="closeBtn" class="primary">Close</button>
+            </div>
+          </div>
+
+          <div id="dialogueActions" class="actions">
+            <button id="nextBtn" class="primary">Next</button>
+            <button id="cancelBtn" class="secondary">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <small>Tip: host this on GitHub Pages (Settings → Pages → Deploy from branch).</small>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
