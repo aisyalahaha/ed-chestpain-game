@@ -6,7 +6,7 @@ const ctx = canvas.getContext('2d');
 
 const overlay = document.getElementById('overlay');
 const dialogueEl = document.getElementById('dialogue');
-const questionBlock = document.getElementById('questionBlock');
+const questionBlock = document.getElementById('questionBlock');X
 const dialogueActions = document.getElementById('dialogueActions');
 const nextBtn = document.getElementById('nextBtn');
 const cancelBtn = document.getElementById('cancelBtn');
@@ -339,9 +339,11 @@ let answered = false;
 let studentName = '';
 let studentId = '';
 let started = false;
-// Optional: send results to a Google Sheets web app (Apps Script). Leave blank to disable.
-const RESULTS_WEB_APP_URL = ''; // <-- paste your Apps Script Web App URL here
+
+// Google Sheets auto-collection (READY)
+const RESULTS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwdKXFEXVZQnToyIBrElWP8_lRpHr0RGXZpd8UwPU_aVqf3pUUZ-tGx32A4pUJUGHHn/exec';
 const RESULTS_SHARED_SECRET = 'AISYAgame';
+
 
 
 
